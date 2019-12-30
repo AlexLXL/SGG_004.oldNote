@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<!--第一步-->
+	<meta name="viewport" content="width=device-width,initial-scale=1,minimum-scale=1,maximum-scale=1,user-scalable=no" />
+	<title>移动端适配七部</title>
+	<!--第二步--><!--第六步，禁系统滚动条-->
+	<link rel="stylesheet" href="./css/reset_mobile.css" />
+	<!--第七步，模拟移动端屏幕区域-->
+	<style>
+		#wrap{
+			width: 100%;
+			height: 100%;
+			overflow: hidden;
+		}
+	</style>
+</head>
+<body>
+	<div id="wrap"></div>
+	
+	<script>
+		/*第三步，rem适配*/
+		!(function(){
+			var width = document.documentElement.clientWidth;
+			var styleNode = document.createElement("style");
+			styleNode.innerHTML = 'html{font-size: '+ width/16 +'px !important;}';
+			document.head.appendChild(styleNode);
+		})();
+		/*第四步，阻止浏览器默认行为*/
+		document.addEventListener("touchstart",function(ev){
+			ev.preventDefault()
+		});
+		/*第五步，处理a标签穿透问题*/
+		aNodesBind();
+		function aNodesBind(){
+			var aNodes = document.querySelector("a");
+			for(var i=0;i<aNodes.length;i++){
+				aNodes[i].addEventListener('touchstart',function(){
+					window.location.href = this.href;
+				})
+			}
+		}
+		
+	</script>
+</body>
+</html>

@@ -1,0 +1,54 @@
+html, body, ul, li, ol, dl, dd, dt, p, h1, h2, h3, h4, h5, h6, form, fieldset, legend, img ,table, span, var, strong, em, input, select, option, textarea{ 
+    margin:0;
+    padding:0; 
+}
+img { 
+    border:none; 
+	display:block;
+}
+address, caption, cite, code, dfn, th, var, em, strong, b, i, u{ 
+    font-style:normal; 
+    font-weight:normal; 
+}
+ul, ol {
+    list-style:none; 
+}
+input, select, textarea{
+	/*当获取焦点的时候,呈现一个蓝色的光环包围表单*/
+    outline: 0;
+}
+textarea{
+	/*让textarea元素不能被用户进行拉动 放大缩小*/
+    resize: none;
+    overflow: auto;
+}
+table{
+    border-collapse: collapse; 
+    border-spacing: 0;
+}
+body { 
+    color:#000; 
+    background:#fff; 
+    overflow-x:hidden;
+}
+a { 
+    color:#000; 
+    text-decoration:none; 
+	display:block;
+}
+a:visited { 
+    color:#000; 
+}
+a:hover, a:active{ 
+    color:#ff8400; 
+    text-decoration:underline; 
+}
+.clearfix:after{
+    content: "\200B";
+    display: block;
+    height: 0;
+    clear: both;
+}
+.clearfix{
+    zoom: 1;
+}

@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="zh">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>玉树临风美少年，揽镜自顾夜不眠 </title>
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <script src="./myPubSub.js"></script>
+    <script type="text/javascript">
+        myPubSub.subscribe('add',function(data){
+            console.log('add1111:' + data);
+        })
+        const token = myPubSub.subscribe('add',function(data){
+            console.log('add2222:' + data);
+        })
+        myPubSub.subscribe('del',function(data){
+            console.log('del111:' + data);
+        })
+
+        // myPubSub.unsubscribe()
+        myPubSub.unsubscribe(token)
+
+        myPubSub.publish('add', '我知道了傻逼')
+        myPubSub.publish('del', '我知道了傻逼')
+    </script>
+</body>
+
+</html>

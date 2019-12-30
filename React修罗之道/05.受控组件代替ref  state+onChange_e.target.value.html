@@ -1,0 +1,76 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="UTF-8">
+  <title>受控组件（表单收集信息）</title>
+</head>
+<body>
+<div id="example"></div>
+
+<script type="text/javascript" src="../js/react.development.js"></script>
+<script type="text/javascript" src="../js/react-dom.development.js"></script>
+<script type="text/javascript" src="../js/babel.min.js"></script>
+<script type="text/babel">
+  /*
+  需求: 自定义包含表单的组件
+    1. 界面如下所示
+    2. 输入用户名密码后, 点击登陆提示输入信息
+    3. 不提交表单
+  */
+
+
+  
+  class Form extends React.Component {
+    state = {
+      username: '',
+      password: ''
+    };
+
+    handleSubmit = (e) => {
+      e.preventDefault();
+      const { username, password } = this.state;
+      alert(`账号：${username}   密码：${password}`);
+      /*this.state.username = '';     //state不是这样设置的，错,一次
+      this.state.password = '';*/
+      this.setState({
+        username: '',
+        password: ''
+      })
+    };
+
+    // handleUsername = (e) => {
+    //   const username = e.target.value;
+    //   this.setState({
+    //     username
+    //   })
+    // };
+    //
+    // handlePassword = (e) => {
+    //   const password = e.target.value;
+    //   this.setState({
+    //     password
+    //   })
+    // };
+    
+    handleChange = (name) => {
+      return (e) => {
+        this.setState({
+          [name]: e.target.value
+        })
+      }
+    };
+
+    render() {
+      const { username, password } = this.state;
+      return <form onSubmit={ this.handleSubmit }>
+        账号：<input type="text"  name="username" onChange={ this.handleChange('username') } value={ username }/>
+        密码：<input type="password" name="password" onChange={ this.handleChange('password') } value={ password }/>
+        <input type="submit" value="提交" />
+      </form>
+    }
+  }
+
+  ReactDOM.render(<Form />, document.getElementById('example'))
+</script>
+</body>
+</html>

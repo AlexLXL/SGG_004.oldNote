@@ -1,0 +1,109 @@
+// 因为元素的&before 和 &::after都只能有一个, 所以配合使用的时候可以组合出上下、左右、上右、下左(想要其他组合要改::after和::before)
+
+// 一像素上边框
+top-border-1px($color)
+  position relative
+  //border none // 清了当前元素的边框(可不加)
+  &::before     // 伪类定位到当前元素位置进行边框显示
+    content ''
+    position absolute   // 定位
+    z-index 200
+    left 0
+    top 0
+    width 100%          // 一条边
+    height 1px
+    background-color $color   // 一条边的颜色
+    @media only screen and (-webkit-device-pixel-ratio: 2 )   // 媒体查询进行边框缩放
+      transform scaleY(.5)
+    @media only screen and (-webkit-device-pixel-ratio: 3 )
+      transform scaleY(.333333)
+
+// 一像素下边框
+bottom-border-1px($color)
+  position relative
+  &::after
+    content ''
+    position absolute
+    left 0
+    bottom 0
+    width 100%
+    height 1px
+    background-color $color
+    @media only screen and (-webkit-device-pixel-ratio: 2 )
+      transform scaleY(.5)
+    @media only screen and (-webkit-device-pixel-ratio: 3 )
+      transform scaleY(.333333)
+
+// 一像素左边框
+left-border-1px($color)
+  position relative
+  &::before
+    content ''
+    position absolute
+    left 0
+    top 0
+    width 1px
+    height 100%
+    background-color $color
+    @media only screen and (-webkit-device-pixel-ratio: 2 )
+      transform scaleX(.5)
+    @media only screen and (-webkit-device-pixel-ratio: 3 )
+      transform scaleX(.333333)
+
+// 一像素右边框
+right-border-1px($color)
+  position relative
+  &::after
+    content ''
+    position absolute
+    right 0
+    top 0
+    width 1px
+    height 100%
+    background-color $color
+    @media only screen and (-webkit-device-pixel-ratio: 2 )
+      transform scaleX(.5)
+    @media only screen and (-webkit-device-pixel-ratio: 3 )
+      transform scaleX(.333333)
+
+// 1px边框 + 圆角边框
+border-1px($color= #ccc, $radius= 0px, $style= solid)
+  position relative
+  &::before
+    content: '';
+    display: block;
+    position: absolute;
+    left: 0;
+    top: 0;
+    transform-origin: 0 0;  // 这个一定要设置，不然缩放会导致移位
+    border: 1px $style $color;
+    border-radius: $radius;
+    box-sizing: border-box;
+    width: 100%;
+    height: 100%;
+    @media only screen and (-webkit-device-pixel-ratio: 2) {  // 全边框的 媒体查询 大小和radius都要改
+      width: 200%;
+      height: 200%;
+      border-radius: $radius * 2;
+      transform: scale(.5);
+    }
+    @media only screen and (-webkit-device-pixel-ratio: 3) {
+      width: 300%;
+      height: 300%;
+      border-radius: $radius * 2;
+      transform: scale(.33);
+    }
+
+//根据像素比来使用 2x图 3x图
+bg-image($url)
+  background-image: url($url + "@2x.png")
+  @media (-webkit-min-device-pixel-ratio: 3),(min-device-pixel-ratio: 3)
+    background-image: url($url + "@3x.png")
+
+//清除浮动
+clearFix()
+  zoom 1
+  &::after
+    content ''
+    display block
+    clear both

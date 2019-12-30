@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>每天都被自己帅醒!</title>
+    <link rel="stylesheet" href="">
+    <script type="text/javascript" src="../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app">
+        <fieldset>
+            <legend>姓名操作</legend>
+            姓氏:
+            <input type="text" placeholder="请输入姓名" v-model="surname"><br />
+            名字:
+            <input type="text" placeholder="请输入名字" v-model="name"><br />
+        </fieldset>
+        <fieldset>
+            <legend>单向和双向操作</legend>
+            姓名(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName1"><br /> <!-- 这里用到计算属性get,直接写方法 -->
+            姓名(单向操作):<input type="text" placeholder="显示姓名" v-model="fullName3"><br /> <!-- 监听 -->
+            姓名(双向操作):<input type="text" placeholder="显示姓名" v-model="fullName2"><br /> <!-- 这里用到计算属性get、set,写成对象里面写get,set -->
+        </fieldset>
+    </div>
+    <script type="text/javascript">
+    // data和计算属性都是放在this上、即Vue实例对象vm
+        const vm = new Vue({
+            el: '#app',
+
+            // 数据
+            data: {
+                surname: '哥尔',
+                name: '罗杰',
+                fullName3: ''
+            },
+
+            // 计算属性( 使用:一个数据随另一个数据变化而变化 )
+            computed: {
+                fullName1() {   // 只读东西，写方法，return
+                    return this.surname + '•D•' + this.name;
+                },
+
+                fullName2: {    // 读写都有，写对象
+                    get() {
+                        return this.surname + '•D•' + this.name;
+                    },
+                    set(val) {
+                        const name = val.split('•D•');
+                        this.surname = name[0];
+                        this.name = name[1];
+                    }
+                },
+            },
+
+           // 局部监听 ( fullName需要定义[在data] )
+           watch: {
+                surname(val) {
+                    this.fullName3 = val + '-' + this.name;
+                },
+                name(val) {
+                    this.fullName3 = this.surname + '-' + val;
+                }
+            }
+        })
+
+        // 全局监听
+        // vm.$watch('name',function(val) {
+        //     this.fullName3 = this.surname + '-' + val;
+        // })
+    </script>
+</body>
+
+</html>

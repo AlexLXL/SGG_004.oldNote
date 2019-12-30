@@ -1,0 +1,48 @@
+{
+  "pages": [
+    "pages/index/main",
+    "pages/books/main",
+    "pages/bookslist/main",
+    
+    
+    "pages/detail/main",
+    "pages/search/main",
+    "pages/personal/main"
+    
+    
+  ],
+  "window": {
+    "navigationBarBackgroundColor": "#02a774",
+    "navigationBarTextStyle": "white",
+    "navigationBarTitleText": "浪书城",
+    "navigationStyle": "default",
+    "backgroundColor": "#ffffff",
+    "backgroundTextStyle": "dark",
+    "backgroundColorTop": "#ffffff",
+    "backgroundColorBottom": "#ffffff",
+    "enablePullDownRefresh": false,
+    "onReachBottomDistance": 50
+  },
+  "tabBar": {
+    "list": [
+      {
+        "pagePath": "pages/books/main",
+        "text": "图书列表",
+        "iconPath": "/static/imgs/book.png",
+        "selectedIconPath": "/static/imgs/book-active.png"
+      },
+      {
+        "pagePath": "pages/search/main",
+        "text": "搜索图书",
+        "iconPath": "/static/imgs/todo.png",
+        "selectedIconPath": "/static/imgs/todo-active.png"
+      },
+      {
+        "pagePath": "pages/personal/main",
+        "text": "个人中心",
+        "iconPath": "/static/imgs/me.png",
+        "selectedIconPath": "/static/imgs/me-active.png"
+      }
+    ]}
+  
+}
